@@ -1,25 +1,40 @@
-Ionic App Base
+Cart Mobile App
 =====================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+### Description
 
-## Using this project
+This mobile app helps connect independent business owners to customers around the world by working as a platform for business owners to be able to plug in their business for potential customers to see and buy.
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+### Technologies Used
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+- NodeJS + Express + Angular
+- MongoDB + Mongoose
+- Javascript + jQuery
+- Cordova + Ionic
+- HTML
+- CSS
 
-```bash
-$ npm install -g ionic
-```
+## Future Implementations
 
-Then run:
+- Facebook auth
+- Stripe
+- Search tab
+- Notifications Tab
+- Photo upload
 
-```bash
-$ ionic start myProject tabs
-```
 
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
+### Data Model
 
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
+
+- Users
+  - contains user data (email, name, password, products, followers/following )
+- Likes
+  - contains like data
+- Products
+  - contains data about the products a user post-user
+- Relations
+  - contains data about who the user follows/following
+- Category
+  - contains data about which category a product is help within
+- Review
+  - contains data about what review a product has
