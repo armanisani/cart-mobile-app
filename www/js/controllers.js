@@ -10,10 +10,37 @@ angular.module('starter.controllers', [])
   .controller('NotificationsCtrl', NotificationsCtrl)
   .controller('ProfileCtrl', ProfileCtrl)
   .controller('PhotoViewCtrl', PhotoViewCtrl)
+  .controller('MyController', function($scope, $ionicModal) {
+    // module popup
+  $ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openModal = function() {
+    $scope.modal.show();
+  };
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
+});
 
 
 MainCtrl.$inject = ["$stateParams", "$rootScope", "$state", "auth", "user", "$window"]
-HomeCtrl.$inject = ["$stateParams", "userService", "productService", 'likeService', "$window", "$ionicLoading", "$ionicSlideBoxDelegate"]
+HomeCtrl.$inject = ["$stateParams", "userService", "productService", 'likeService', "$window", "$ionicLoading", "commentService"]
 SearchCtrl.$inject = ["productService", "categoryService", "userService", "relationService", "$window", "relationService", "$ionicLoading", "$ionicSlideBoxDelegate"]
 PostCtrl.$inject = ["$stateParams", "userService", "productService", "$cordovaCamera", "$scope", "$cordovaFileTransfer", "$cordovaFile", "$ionicLoading", "$ionicSlideBoxDelegate", "$window"]
 NotificationsCtrl.$inject = ["$stateParams", "userService", "$ionicLoading"]
@@ -149,11 +176,12 @@ function authInterceptor(API, auth) {
   }
 
 // News Feed
-function HomeCtrl($stateParams, userService, productService, likeService, $window, $ionicLoading){
+function HomeCtrl($stateParams, userService, productService, likeService, $window, $ionicLoading, commentService){
   var self = this
   self.productsArray = []
   self.peopleArray = []
-
+  self.message = ""
+  self.showerC = false
   // Setup the loader
   $ionicLoading.show({
     animation: 'fade-in',
@@ -193,13 +221,23 @@ function HomeCtrl($stateParams, userService, productService, likeService, $windo
   }
 })
   self.liked = function(product){
-    console.log(product, 'insideeeeeeee');
+    console.log("inside liker");
     likeService.post(({user: $window.localStorage.getItem('cID'), _product:product})).success(function(result){
-      console.log(result);
+      // self.$on('$ionicView.enter', function(e) {});
       if(result){
         console.log(result);
       }
     })
+  }
+  self.comment = function(product){
+    console.log(product, "inside 2")
+    commentService.create(({_creator: $window.localStorage.getItem('cID'), product_commented_on: product, description: self.comment})).success(function(result){
+      console.log(result);
+      self.showerC = false
+    })
+  }
+  self.showC = function(){
+    self.showerC = true
   }
 
 }

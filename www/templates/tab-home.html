@@ -48,13 +48,22 @@
        <a ng-click="hc.liked(p._id)" class="tab-item" href="#">
            <i class="icon ion-heart"></i> Like
        </a>
-       <a class="tab-item" href="#">
+       <a ng-click="hc.showC()" class="tab-item" href="#">
            <i class="icon ion-chatbox"></i> Comment
        </a>
+
        <a class="tab-item" href="#">
            <i class="icon ion-ios-cart"></i> Cart It!
        </a>
    </div>
+   <div ng-show="hc.showerC" class="">
+   <span class="input-label">Comment</span>
+   <input ng-model="hc.message"type="text" placeholder="Message">
+   <button class="button" ng-click="hc.comment(p._id)" type="button">Confirm Comment</button>
+
+    </div>
+
+
 </div>
 
 </ion-content>
