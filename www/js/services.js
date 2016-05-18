@@ -19,7 +19,7 @@ function userService($http){
     show: show,
     create: create,
     delete: destroy,
-    update: update,
+    update: update
   }
   return service
 
